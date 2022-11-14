@@ -3,7 +3,8 @@ title: "WebSocket API x Serverless Framework x Node.js/Goでチャットアプ�
 emoji: "👨"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["apigateway", "websocket", "serverlessframework", "nodejs", "go"]
-published: false
+published: true
+published_at: 2022-11-21 07:00
 ---
 
 もうすぐ 2 歳になる次男がよく寝てくれるようになったせいか、2 年ぶりくらいに早起きが習慣化してきました w
