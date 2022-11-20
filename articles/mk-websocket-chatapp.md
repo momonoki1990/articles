@@ -8,7 +8,7 @@ published_at: 2022-11-21 07:00
 ---
 
 もうすぐ 2 歳になる次男がよく寝てくれるようになったせいか、2 年ぶりくらいに早起きが習慣化してきました w
-エンジニアの熊瀬川です。
+エンジニアの Naoya です。
 
 AWS のチュートリアルで作成した API Gateway の WebSocket API を使ったチャットアプリを、Serverless Framework で再現してみました。
 言語は、普段から使用している Node.js と勉強中の Go の 2 種類使いました。
@@ -54,6 +54,29 @@ Chrome のネットワークタブで確認したところ、最初の接続確�
 ![](/images/websocket-chatapp/101_Switching_Protocols.png)
 
 ※[Go 言語による Web アプリケーション開発](https://www.amazon.co.jp/Go%E8%A8%80%E8%AA%9E%E3%81%AB%E3%82%88%E3%82%8BWeb%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E9%96%8B%E7%99%BA-Mat-Ryer/dp/4873117526)で作成した[チャットアプリ](https://github.com/momonoki1990/go-web-app-orreilly-book/tree/main/chat-app)を動かして確認しました。
+
+## AWS Lambda・API Gateway・DynamoDB とは？
+
+Lambda はアプリケーション(関数)の実行ファイルを zip 化してアップロードするだけでアプリケーションを実行することができる、サーバーレスな実行環境(サーバー)です。
+日本語がおかしいような気もします w が、「サーバーレス」といったときは、サーバーの設定やメンテナンスが不要で、負荷に応じてスケーリングする機能を備えているなど、サーバーのことを意識しないで済むクラウドサービスのことを指しているように思います。
+
+S3 や API Gateway など AWS の他のサービスと紐づけて、何かイベントが起きた時に アプリケーションを実行させるというような使い方ができます。
+
+実体(実行環境？)はコンテナで、一定時間実行されないと再度実行される際はコンテナの生成から始まるので時間がかかったり(コールドスタート)、実行時間が 15 分に限られているなどの制約があります。
+
+API Gateway は クライアントからのリクエストを受け付けて Lambda や AWS の他のサービスを呼び出すような API を構築することができるサービスで、主に REST API と WebSocket API の 2 種類あります。
+
+DynamoDB は Key: Value 形式の NoSQL データベースです。
+
+[AWS Lambda](https://aws.amazon.com/jp/lambda/)
+[Amazon API Gateway](https://aws.amazon.com/jp/api-gateway/?nc1=h_ls)
+[Amazon DynamoDB](https://aws.amazon.com/jp/dynamodb/)
+
+[Lambda のコールドスタートを改めて整理する](https://qiita.com/ny7760/items/700ae917da2c5b5e3f8a)
+[落とし穴にハマるな！AWS Lambda を利用するときの 6 つの注意点](https://www.skyarch.net/column/aws-lambda-important-point/)
+
+※メモ: [サーバーレスとフルマネージド: その違いとは？](https://cloud.google.com/blog/ja/topics/developers-practitioners/serverless-vs-fully-managed-whats-difference)
+なるほど、サーバーレスはマネージドを一歩進めて、実行環境(サーバー)に関してはほとんど意識する必要がない(マシンが見えない・制御もほとんどできない)、もはや利用する側からしてみれば「サーバーがないのと一緒」といった感じでしょうか。
 
 ## APIGateway でのルーティング
 
